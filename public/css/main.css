@@ -7025,6 +7025,7 @@ body.wt-login .wt-userlogedin {
     font-size: 18px;
     font-weight: 400;
     line-height: 21px;
+    color: #FFFFFF
 }
 
 .wt-fwidgetcontent {
@@ -7049,13 +7050,13 @@ body.wt-login .wt-userlogedin {
 
 .wt-fwidgetcontent li a {
     display: block;
-    color: #767676;
+    color: #fcfcfc;
     line-height: inherit;
 }
 
 .wt-fwidgetcontent li:hover a,
 .wt-fwidgetcontent li a:focus {
-    color: #323232;
+    color: #ffffff;
     padding-left: 10px;
 }
 
@@ -7169,12 +7170,12 @@ body.wt-login .wt-userlogedin {
 .wt-comingsoon-wt-copyrights a:hover,
 .wt-comingsoon-wt-copyrights a:focus,
 .wt-comingsoon-wt-copyrights a {
-    color: #55acee;
+    color: #FFFFFF;
     text-decoration: none;
 }
 
 .wt-copyrights span {
-    color: #55acee;
+    color: #FFFFFF;
 }
 
 .wt-addnav {

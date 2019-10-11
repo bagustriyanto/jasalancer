@@ -9,9 +9,6 @@
     ?>
 <?php endif; ?>
 <style>
-    #wt-header {
-        background-color: #6D3268
-    }
     .wt-logo {
         max-width: 20%
     }

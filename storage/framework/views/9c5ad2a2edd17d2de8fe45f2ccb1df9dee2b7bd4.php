@@ -76,7 +76,6 @@
 		?>;
 	</script>
 </head>
-<?php echo e(App::getLocale()); ?>
 
 <body class="wt-login <?php echo e(Helper::getBodyLangClass()); ?> <?php echo e(Helper::getTextDirection()); ?>">
     <?php echo e(\App::setLocale(env('APP_LANG'))); ?>

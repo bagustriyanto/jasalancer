@@ -1090,6 +1090,7 @@ return [
     'show_service_banner' => 'Service Banner',
     'show_emplyr_inn_sec' => 'Show Or Hide Employer Inner Section',
     'show_hide' => 'Show Or Hide',
+    'join_with_us' => 'Join With Us',
     'employee_list' => [
         'just_me' => 'Its Just Me',
         '2_9' => '2 - 9 Employees',

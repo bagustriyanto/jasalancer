@@ -3,6 +3,17 @@
  'front-end.master', ['body_class' => 'wt-innerbgcolor'] )
 @push('stylesheets')
     <link href="{{ asset('css/owl.carousel.min.css') }}" rel="stylesheet">
+        <style>
+        .wt-innerbannerholder {
+            margin-top: -105px !important;
+            height: 300px !important;
+            background-size: 100% 100% !important;
+            display: flex;
+        }
+        .wt-innerbannerholder::before{
+            background: rgba(0, 0, 0, 0);
+        }
+    </style>
 @endpush
 @section('title'){{ $f_list_meta_title }} @stop
 @section('description', $f_list_meta_desc)

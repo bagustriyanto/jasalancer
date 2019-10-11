@@ -20,6 +20,34 @@
             $services = App\Service::latest()->paginate(6);
         }
     ?>
+    <style>
+        .wt-newbanner {
+            margin-top: -105px !important;
+            height: 900px !important;
+            background-size: 100% 100% !important;
+            display: flex;
+        }
+        .wt-newbanner::before, .wt-bannerholdervtwo::before{
+            background: rgba(0, 0, 0, 0);
+        }
+        .title-joinus {            
+            border-bottom: solid #DC5E84;
+            width: 20%;
+            display: inline-block;
+        }
+        .wt-companycontent {
+            height: 350px;
+            padding: 120px 40px;
+            box-shadow: 0px 0px 12px #888888;
+        }
+        .wt-companycontent-new {
+            box-shadow: inset 0px 0px 5px grey;
+            text-align: center;
+        }
+        .wt-footeraboutus, .wt-footerbottom {
+            background: #311847;
+        }
+    </style>
     <div id="home" class="la-home-page">
         <?php if(Session::has('error')): ?>
             <div class="flash_msg">
@@ -27,9 +55,9 @@
             </div>
             <?php session()->forget('error'); ?>
         <?php endif; ?>
-        <div class="wt-haslayout wt-bannerholder" style="background-image:url(<?php echo e(asset(Helper::getHomeBanner('image'))); ?>)">
+        <div class="wt-haslayout wt-bannerholder wt-newbanner" style="background-image:url(<?php echo e(asset(Helper::getHomeBanner('image'))); ?>)">
             <div class="container">
-                <div class="row">
+                <div class="row" style="justify-content: center; height: 100%">
                     <!-- <div class="col-12 col-sm-12 col-md-12 col-lg-5">
                         <div class="wt-bannerimages">
                             <figure class="wt-bannermanimg" data-tilt>
@@ -75,7 +103,43 @@
             </div>
         </div>
         <!--Top Services Start-->
-        <?php if(Helper::getServiceSection('show_services_section') === 'true'): ?>
+        <?php if(!empty($categories)
+            && $categories->count() > 0
+            && Helper::getHomeSection('show_cat_section') == 'true'): ?>
+            <section class="wt-haslayout wt-main-section">
+                <div class="container">
+                    <div class="row justify-content-md-center">
+                        <div class="col-xs-12 col-sm-12 col-md-8 push-md-2 col-lg-6 push-lg-3">
+                            <div class="wt-sectionhead wt-textcenter">
+                                <div class="wt-sectiontitle">
+                                    <h2><?php echo e(Helper::getHomeSection('cat_sec_title')); ?></h2>
+                                    <span><?php echo e(Helper::getHomeSection('cat_sec_subtitle')); ?></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="wt-categoryexpl">
+                            <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-3 float-left">
+                                    <div class="wt-categorycontent">
+                                        <figure><img src="<?php echo e(asset(Helper::getCategoryImage($category->image))); ?>" alt="<?php echo e($category->title); ?>"></figure>
+                                        <div class="wt-cattitle">
+                                            <h3><a href="<?php echo e(url('search-results?type='.$type.'&category%5B%5D='.$category->slug)); ?>"><?php echo e($category->title); ?></a></h3>
+                                        </div>
+                                        <div class="wt-categoryslidup">
+                                            <?php if(!empty($category->abstract)): ?>
+                                                <p><?php echo e($category->abstract); ?></p>
+                                            <?php endif; ?>
+                                            <a href="<?php echo e(url('search-results?type='.$type.'&category%5B%5D='.$category->slug)); ?>"><?php echo e(trans('lang.explore')); ?> <i class="fa fa-arrow-right"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        <?php endif; ?>
+                <?php if(Helper::getServiceSection('show_services_section') === 'true'): ?>
             <section class="wt-haslayout wt-main-section wt-bglight">
                 <div class="container">
                     <div class="row justify-content-md-center">
@@ -155,49 +219,16 @@
                 </div>
             </section>
         <?php endif; ?>
-        <?php if(!empty($categories)
-            && $categories->count() > 0
-            && Helper::getHomeSection('show_cat_section') == 'true'): ?>
-            <section class="wt-haslayout wt-main-section">
-                <div class="container">
-                    <div class="row justify-content-md-center">
-                        <div class="col-xs-12 col-sm-12 col-md-8 push-md-2 col-lg-6 push-lg-3">
-                            <div class="wt-sectionhead wt-textcenter">
-                                <div class="wt-sectiontitle">
-                                    <h2><?php echo e(Helper::getHomeSection('cat_sec_title')); ?></h2>
-                                    <span><?php echo e(Helper::getHomeSection('cat_sec_subtitle')); ?></span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="wt-categoryexpl">
-                            <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-3 float-left">
-                                    <div class="wt-categorycontent">
-                                        <figure><img src="<?php echo e(asset(Helper::getCategoryImage($category->image))); ?>" alt="<?php echo e($category->title); ?>"></figure>
-                                        <div class="wt-cattitle">
-                                            <h3><a href="<?php echo e(url('search-results?type='.$type.'&category%5B%5D='.$category->slug)); ?>"><?php echo e($category->title); ?></a></h3>
-                                        </div>
-                                        <div class="wt-categoryslidup">
-                                            <?php if(!empty($category->abstract)): ?>
-                                                <p><?php echo e($category->abstract); ?></p>
-                                            <?php endif; ?>
-                                            <a href="<?php echo e(url('search-results?type='.$type.'&category%5B%5D='.$category->slug)); ?>"><?php echo e(trans('lang.explore')); ?> <i class="fa fa-arrow-right"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        <?php endif; ?>
         <?php if(Helper::getHomeSection('show_section') == 'true'): ?>
-            <section class="wt-haslayout wt-main-section wt-paddingnull wt-bannerholdervtwo" style="background-image:url(<?php echo e(asset(Helper::getHomeSection('background_image'))); ?>)">
+            <section class="wt-haslayout wt-main-section wt-paddingnull wt-bannerholdervtwo">
                 <div class="container">
                     <div class="row">
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12" style="text-align:center">
+                            <h1 class="title-joinus"><?php echo e(trans('lang.join_with_us')); ?></h1>
+                        </div>
                         <div class="col-12 col-sm-12 col-md-12 col-lg-12">
-                            <div class="wt-companydetails">
-                                <div class="wt-companycontent">
+                            <div class="wt-companydetails row">
+                                <div class="wt-companycontent col-5 col-sm-5 col-md-5 col-lg-5">
                                     <div class="wt-companyinfotitle">
                                         <h2><?php echo e(Helper::getHomeSection('left_title')); ?></h2>
                                     </div>
@@ -208,7 +239,8 @@
                                         <a href="<?php echo e(Helper::getHomeSection('left_url')); ?>" class="wt-btn"><?php echo e(trans('lang.join_now')); ?></a>
                                     </div>
                                 </div>
-                                <div class="wt-companycontent">
+                                <div class="col-2 col-sm-2 col-md-2 col-lg-2"></div>
+                                <div class="wt-companycontent col-5 col-sm-5 col-md-5 col-lg-5">
                                     <div class="wt-companyinfotitle">
                                         <h2><?php echo e(Helper::getHomeSection('right_title')); ?></h2>
                                     </div>
